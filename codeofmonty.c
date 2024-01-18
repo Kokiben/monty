@@ -12,7 +12,7 @@
 int main(int arc, char *arv[])
 {
 char *opcode;
-FILE *data;
+FILE *data = fopen(data_path, "r")
 size_t line_buffer_size = 0;
 size_t line_length;
 unsigned int line_counter = 0;
