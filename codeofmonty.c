@@ -1,5 +1,7 @@
 #include "monty.h"
 
+transport_t trans = {0, NULL, NULL, NULL};
+
 /**
  * main - interpreter for custom monty code.
  * @argc: total number of arguments.

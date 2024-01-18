@@ -49,9 +49,6 @@ FILE *data;
 } transport_t;
 extern transport_t trans;
 
-#define transport_INIT \
-{0, NULL, NULL, NULL}
-
 void code_swap(stack_t **stack, unsigned int line_number);
 void code_add(stack_t **stack, unsigned int line_number);
 void code_nop(stack_t **stack, unsigned int line_number);
