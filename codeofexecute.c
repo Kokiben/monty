@@ -42,7 +42,7 @@ code_pint(stack, line_number);
 else if (strcmp(opcode, "swap") == 0)
 {
 code_swap(stack, line_number);
-} 
+}
 else
 {
 fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);

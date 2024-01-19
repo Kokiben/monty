@@ -42,10 +42,10 @@ void (*f)(stack_t **stack, unsigned int line_number);
 
 typedef struct transport
 {
-int status;
-char *opcode;
-char *payload;
-FILE *data;
+int status; // status indicator
+char *opcode; //opcode string
+char *payload; // payload data
+FILE *data; //file ptr
 } transport_t;
 extern transport_t trans;
 

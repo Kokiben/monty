@@ -6,13 +6,16 @@
 * @line_number : int present line index within the Monty opcode.
 *
 */
-void code_push(stack_t** stack, unsigned int line_number) {
+void code_push(stack_t **stack, unsigned int line_number)
+{
 int i, k = 0, stand = 0;
 
 if (!trans.payload || (trans.payload[0] == '-' && (trans.payload[1] == '\0' || !isdigit(trans.payload[1]))))
 stand = 1;
-else {
-for (; trans.payload[k] != '\0'; k++) {
+else
+{
+for (; trans.payload[k] != '\0'; k++)
+{
 if (!isdigit(trans.payload[k]))
 stand = 1;
 }
@@ -20,7 +23,8 @@ stand = 1;
 if (stand)
 {
 fprintf(stderr, "L%d: usage: push integer\n", line_number);
-if (trans.data) {
+if (trans.data)
+{
 fclose(trans.data);
 }
 free(trans.opcode);
@@ -41,12 +45,13 @@ opqueu_add(stack, i);
  * @stack: Ptr to stack.
  * @line_number: Line number in Monty file.
  */
-void code_pall(stack_t **stack, unsigned int line_number) {
+void code_pall(stack_t **stack, unsigned int line_number)
+{
 if (*stack != NULL)
 {
 printf("%d\n", (*stack)->n);
 }
-else 
+else
 {
 (void)line_number;
 }

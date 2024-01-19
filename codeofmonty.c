@@ -1,6 +1,5 @@
 #include "monty.h"
 
-transport_t trans = {0, NULL, NULL, NULL};
 
 /**
  * main - interpreter for custom monty code.
@@ -11,6 +10,7 @@ transport_t trans = {0, NULL, NULL, NULL};
 
 int main(int argc, char *argv[])
 {
+transport_t trans = {0, NULL, NULL, NULL};
 char *opcode;
 FILE *data;
 size_t line_buffer_size = 0;
@@ -23,10 +23,12 @@ if (argc != 2)
 fprintf(stderr, "USAGE: monty file\n");
 exit(EXIT_FAILURE);
 }
-else {
+else
+{
 data = fopen(argv[1], "r");
 
-if (!data) {
+if (!data)
+{
 fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 exit(EXIT_FAILURE);
 }
@@ -37,7 +39,8 @@ opcode = NULL;
 line_length = getline(&opcode, &line_buffer_size, data);
 line_counter++;
 
-if (line_length > 0) {
+if (line_length > 0)
+{
 code_execute(opcode, &execut_stack, line_counter, data);
 }
 
@@ -46,5 +49,5 @@ free(opcode);
 
 _freesta(execut_stack);
 fclose(data);
-return 0;
+return (0);
 }

@@ -8,7 +8,8 @@
 void opnod_add(stack_t **stack, int value)
 {
 stack_t *element = calloc(1, sizeof(stack_t));
-if (!element) {
+if (!element)
+{
 fprintf(stderr, "Error: calloc failed\n");
 exit(EXIT_FAILURE);
 }
@@ -17,7 +18,8 @@ element->n = value;
 element->next = *stack;
 element->prev = NULL;
 
-if (*stack != NULL) {
+if (*stack != NULL)
+{
 (*stack)->prev = element;
 }
 
@@ -48,7 +50,8 @@ element->prev = NULL;
 *stack = element;
 return;
 }
-while (temp->next != NULL) {
+while (temp->next != NULL)
+{
 temp = temp->next;
 }
 
