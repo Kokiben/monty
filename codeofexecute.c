@@ -14,34 +14,45 @@ char *opcode, *arg;
 int result = 0;
 
 opcode = strtok(code, " \t\n");
-if (!opcode || opcode[0] == '#') {
-return 0;
+if (!opcode || opcode[0] == '#')
+{
+return (0);
 }
 
 arg = strtok(NULL, " \t\n");
 trans.opcode = opcode;
 trans.payload = arg;
 
-if (strcmp(opcode, "push") == 0) {
+if (strcmp(opcode, "push") == 0)
+{
 code_push(stack, line_number);
-} else if (strcmp(opcode, "pop") == 0) {
+}
+else if (strcmp(opcode, "pop") == 0)
+{
 code_pop(stack, line_number);
-} else if (strcmp(opcode, "pall") == 0) {
+}
+else if (strcmp(opcode, "pall") == 0)
+{
 code_pall(stack, line_number);
-} else if (strcmp(opcode, "pint") == 0) {
+}
+else if (strcmp(opcode, "pint") == 0)
+{
 code_pint(stack, line_number);
-} else if (strcmp(opcode, "swap") == 0) {
+}
+else if (strcmp(opcode, "swap") == 0)
+{
 code_swap(stack, line_number);
 } 
 else
 {
 fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-if (data) {
+if (data)
+{
 fclose(data);
 }
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
 
-return result;
+return (result);
 }
