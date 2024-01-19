@@ -1,4 +1,3 @@
-#define _POSIX_C_SOURCE 200809L
 #include <stdio.h>
 #include "monty.h"
 transport_t trans = {0, NULL, NULL, NULL};
