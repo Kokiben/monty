@@ -1,5 +1,7 @@
+#define _POSIX_C_SOURCE 200809L
+#include <stdio.h>
 #include "monty.h"
-
+transport_t trans = {0, NULL, NULL, NULL};
 
 /**
  * main - interpreter for custom monty code.
@@ -10,7 +12,6 @@
 
 int main(int argc, char *argv[])
 {
-transport_t trans = {0, NULL, NULL, NULL};
 char *opcode;
 FILE *data;
 size_t line_buffer_size = 0;

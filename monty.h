@@ -1,7 +1,6 @@
 #ifndef MONTY_H
 #define MONTY_H
 #define _GNU_SOURCE
-#define _POSIX_C_SOURCE 202112L
 
 #include<stdlib.h>
 #include<stdio.h>
