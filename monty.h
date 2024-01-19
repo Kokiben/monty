@@ -39,13 +39,26 @@ typedef struct instruction_s
 char *opcode;
 void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
-
-typedef struct transport
+/*
+ * struct transport_s - Represents transport information.
+ * @status:  Integer representing the status.
+ *          Typically used for indicating the status of a transport operation
+ * @opcode: String representing the opcode.
+ *          Holds the opcode associated with a Monty instruction.
+ * @payload: String representing the payload.
+ *           Holds the payload data associated with a Monty instruction.
+ * @data:  File pointer representing additional data.
+ *        Used for file-related operations or additional data storage.
+ *  Description: This structure encapsulates information related to the transport
+ * of Monty instructions, including status, opcode, payload, and additional data.
+ *
+ */
+typedef struct transport_s
 {
-int status; // status indicator
-char *opcode; //opcode string
-char *payload; // payload data
-FILE *data; //file ptr
+int status;
+char *opcode;
+char *payload;
+FILE *data;
 } transport_t;
 extern transport_t trans;
 
