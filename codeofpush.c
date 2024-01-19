@@ -35,3 +35,19 @@ opnod_add(stack, i);
 else
 opqueu_add(stack, i);
 }
+
+/**
+ * code_pall - Prints top element of stack.
+ * @stack: Ptr to stack.
+ * @line_number: Line number in Monty file.
+ */
+void code_pall(stack_t **stack, unsigned int line_number) {
+if (*stack != NULL)
+{
+printf("%d\n", (*stack)->n);
+}
+else 
+{
+(void)line_number;
+}
+}
