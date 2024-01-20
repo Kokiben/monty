@@ -7,27 +7,28 @@
  */
 void code_div(stack_t **stack, unsigned int line_number)
 {
-if (*stack == NULL || (*stack)->next == NULL)
+stack_t *current;
+int length = 0, result;
+
+current = *stack;
+while (current)
 {
-fprintf(stderr, "L%d: can't div, stack too short\n", line_number);
+current = current->next;
+length++;
+}
+
+if (length < 2)
+{
+fprintf(stderr, "L%d: division, stack too short\n", line_number);
 fclose(trans.data);
+free(trans.payload);
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
 
-stack_t *tp = *stack;
-*stack = (*stack)->next;
-
-if (tp->n == 0)
-{
-fprintf(stderr, "L%d: division by zero\n", line_number);
-fclose(trans.data);
-_freesta(*stack);
-exit(EXIT_FAILURE);
-}
-
-(*stack)->n /= tp->n;
-(*stack)->prev = NULL;
-
-free(tp);
+current = *stack;
+result = current->next->n / current->n;
+current->next->n = result;
+*stack = current->next;
+free(current);
 }

@@ -7,6 +7,8 @@
  */
 void code_sub(stack_t **stack, unsigned int line_number)
 {
+stack_t *tp;
+tp = *stack;
 if (*stack == NULL || (*stack)->next == NULL)
 {
 fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
@@ -15,7 +17,6 @@ _freesta(*stack);
 exit(EXIT_FAILURE);
 }
 
-stack_t *tp = *stack;
 *stack = (*stack)->next;
 (*stack)->n -= tp->n;
 (*stack)->prev = NULL;
