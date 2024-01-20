@@ -11,15 +11,27 @@
 int code_execute(char *code, stack_t **stack, unsigned int line_number, FILE *data)
 {
 char *opcode, *arg;
-int result = 0;
 
 opcode = strtok(code, " \t\n");
+
 if (!opcode || opcode[0] == '#')
 {
-return (0);
+return 0;
 }
 
 arg = strtok(NULL, " \t\n");
+
+if (!arg && strcmp(opcode, "push") == 0)
+{
+fprintf(stderr, "L%d: missing argument for %s\n", line_number, opcode);
+if (data)
+{
+fclose(data);
+}
+_freesta(*stack);
+exit(EXIT_FAILURE);
+}
+
 trans.opcode = opcode;
 trans.payload = arg;
 
@@ -53,6 +65,5 @@ fclose(data);
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
-
-return (result);
+return 0;
 }

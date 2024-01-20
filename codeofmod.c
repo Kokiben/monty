@@ -5,28 +5,33 @@
  * @stack: Ptr to stack.
  * @line_number: Line number in Monty file.
  */
+
 void code_mod(stack_t **stack, unsigned int line_number)
 {
+
 if (*stack == NULL || (*stack)->next == NULL)
 {
-fprintf(stderr, "L%d: can't mod, stack too short\n", line_number);
-fclose(trans.data);
-_freesta(*stack);
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
+trans.status = EXIT_FAILURE;
+return;
 }
-
-stack_t *tp = *stack;
+stack_t *tp;
+tp = *stack;
 *stack = (*stack)->next;
 
-if (tp->n == 0)
+if (*stack != NULL)
 {
-fprintf(stderr, "L%d: division by zero\n", line_number);
-fclose(trans.data);
-_freesta(*stack);
-exit(EXIT_FAILURE);
+(*stack)->prev = NULL;
+}
+
+if ((*stack)->n == 0)
+{
+fprintf(stderr, "L%u: division by zero\n", line_number);
+trans.status = EXIT_FAILURE;
+free(tp);
+return;
 }
 
 (*stack)->n %= tp->n;
-(*stack)->prev = NULL;
 free(tp);
 }

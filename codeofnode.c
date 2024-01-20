@@ -34,7 +34,7 @@ if (*stack != NULL)
 void opqueu_add(stack_t **stack, int value)
 {
 stack_t *element = calloc(1, sizeof(stack_t));
-stack_t *temp = *stack;
+stack_t *tp = *stack;
 if (!element)
 {
 fprintf(stderr, "Error: calloc failed\n");
@@ -50,11 +50,11 @@ element->prev = NULL;
 *stack = element;
 return;
 }
-while (temp->next != NULL)
+while (tp->next != NULL)
 {
-temp = temp->next;
+tp = tp->next;
 }
 
-temp->next = element;
-element->prev = temp;
+tp->next = element;
+element->prev = tp;
 }

@@ -2,32 +2,26 @@
 
 /**
  * code_swap - Swaps top two elements of stack.
- * @stack: Ptr to stack.
- * @line_number: Line number in Monty file.
+ * @stack: ptr to stack.
+ * @line_number: Line number of the opcode.
  */
 void code_swap(stack_t **stack, unsigned int line_number)
 {
+stack_t *tp;
+
 if (*stack == NULL || (*stack)->next == NULL)
 {
-fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
-fclose(trans.data);
-_freesta(*stack);
-exit(EXIT_FAILURE);
+fprintf(stderr, "L%u: can't swap, stack too short\n", line_number);
+trans.status = EXIT_FAILURE;
+return;
 }
 
-stack_t *tp1 = *stack;
-stack_t *tp2 = (*stack)->next;
-
-tp1->next = tp2->next;
-tp1->prev = tp2;
-
-if (tp2->next != NULL)
-{
-tp2->next->prev = tp1;
-}
-
-tp2->next = tp1;
-tp2->prev = NULL;
-
-*stack = tp2;
+tp = (*stack)->next;
+(*stack)->next = tp->next;
+if (tp->next != NULL)
+tp->next->prev = *stack;
+tp->prev = NULL;
+tp->next = *stack;
+(*stack)->prev = tp;
+*stack = tp;
 }
