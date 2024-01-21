@@ -7,26 +7,20 @@
  */
 void code_sub(stack_t **stack, unsigned int line_number)
 {
-stack_t *curren;
-int stract, sum;
+stack_t *tp;
 
-curren = *stack;
-for (sum = 0; curren != NULL; sum++)
-curren = curren->next;
-
-
-if (sum < 2)
+if (*stack == NULL || (*stack)->next == NULL)
 {
-fprintf(stderr, "L%d: can't subtract, stack too short\n", line_number);
+fprintf(stderr, "L%d: can't sub, stack too short\n", line_number);
 fclose(trans.data);
-free(trans.payload);
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
+tp = *stack;
+stack_t *tp = *stack;
+*stack = (*stack)->next;
+(*stack)->n -= tp->n;
+(*stack)->prev = NULL;
 
-curren = *stack;
-stract = curren->next->n - curren->n;
-curren->next->n = stract;
-*stack = curren->next;
-free(curren);
+free(tp);
 }
