@@ -8,30 +8,39 @@
 
 void code_mod(stack_t **stack, unsigned int line_number)
 {
-stack_t *tp;
-tp = *stack;
-if (*stack == NULL || (*stack)->next == NULL)
+stack_t *curren;
+int stack_leng = 0, sum;
+
+curren = *stack;
+
+while (curren)
 {
-fprintf(stderr, "L%u: can't mod, stack too short\n", line_number);
-trans.status = EXIT_FAILURE;
-return;
+curren = curren->next;
+stack_leng++;
 }
 
-*stack = (*stack)->next;
-
-if (*stack != NULL)
+if (stack_leng < 2)
 {
-(*stack)->prev = NULL;
+fprintf(stderr, "L%d: can't calculate modulus, stack too short\n", line_number);
+fclose(trans.data);
+free(trans.payload);
+_freesta(*stack);
+exit(EXIT_FAILURE);
 }
 
-if ((*stack)->n == 0)
+curren = *stack;
+
+if (curren->n == 0)
 {
-fprintf(stderr, "L%u: division by zero\n", line_number);
-trans.status = EXIT_FAILURE;
-free(tp);
-return;
+fprintf(stderr, "L%d: division by zero\n", line_number);
+fclose(trans.data);
+free(trans.payload);
+_freesta(*stack);
+exit(EXIT_FAILURE);
 }
 
-(*stack)->n %= tp->n;
-free(tp);
+sum = (curren->next->n + curren->n) % curren->n;
+curren->next->n = sum;
+*stack = curren->next;
+free(curren);
 }
