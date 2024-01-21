@@ -5,23 +5,26 @@
  * @stack: Ptr to stack.
  * @line_number: Line number in Monty file.
  */
-void rotr_op(stack_t **stack, unsigned int line_number)
+void rotr_op(stack_t **stack, __attribute__((unused)) unsigned int line_number)
 {
-(void)line_number;
+stack_t *las_nod, *bot;
 
-if (*stack != NULL && (*stack)->next != NULL)
-{
-stack_t *last_nod = *stack;
+bot = *stack;
 
-while (last_nod->next != NULL)
+if (bot == NULL || bot->next == NULL)
 {
-last_nod = last_nod->next;
+return;
 }
 
-last_nod->next = *stack;
-(*stack)->prev = last_nod;
-*stack = last_nod->next;
-last_nod->prev->next = NULL;
-last_nod->prev = NULL;
+while (bot->next)
+{
+bot = bot->next;
 }
+
+las_nod = *stack;
+bot->next = las_nod;
+las_nod->prev = bot->prev;
+bot->prev->next = NULL;
+bot->prev = NULL;
+*stack = bot;
 }
