@@ -9,35 +9,34 @@
 void code_push(stack_t **stack, unsigned int line_number)
 {
 int i, k = 0, stand = 0;
-
-if (!trans.payload || (trans.payload[0] == '-' && (trans.payload[1] == '\0' || !isdigit(trans.payload[1]))))
-stand = 1;
-else
+if (trans.payload)
 {
-for (; trans.payload[k] != '\0'; k++)
+if (trans.payload[0] == '-')
+k++;
+for (; trans.payload[k] != '\0'; j++)
 {
-if (!isdigit(trans.payload[k]))
+if (trans.payload[k] > 57 || trans.payload[k] < 48)
 stand = 1;
 }
-}
-if (stand)
+if (stand == 1)
 {
 fprintf(stderr, "L%d: usage: push integer\n", line_number);
-if (trans.data)
-{
 fclose(trans.data);
-}
-free(trans.opcode);
 free(trans.payload);
-_freesta(*stack);
+free_stack(*stack);
 exit(EXIT_FAILURE);
 }
-
-i = atoi(trans.payload);
-if (trans.status == 0)
-opnod_add(stack, i);
+}
 else
-opqueu_add(stack, i);
+{
+fprintf(stderr, "L%d: usage: push integer\n", line_number);
+fclose(trans.data);
+free(trans.payload);
+free_stack(*stack);
+exit(EXIT_FAILURE);
+}
+i = atoi(trans.payload);
+opnod_add(stack, i);
 }
 
 /**
@@ -47,12 +46,14 @@ opqueu_add(stack, i);
  */
 void code_pall(stack_t **stack, unsigned int line_number)
 {
-if (*stack != NULL)
 {
-printf("%d\n", (*stack)->n);
-}
-else
-{
+stack_t *curren = *stack;
+
 (void)line_number;
+
+while (curren)
+{
+printf("%d\n", curren->n);
+curren = curren->next;
 }
 }
