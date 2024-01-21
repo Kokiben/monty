@@ -8,17 +8,14 @@
 void code_sub(stack_t **stack, unsigned int line_number)
 {
 stack_t *curren;
-int stack_leng = 0, sum;
+int stract, sum;
 
 curren = *stack;
-
-while (curren)
-{
+for (sum = 0; curren != NULL; sum++)
 curren = curren->next;
-stack_leng++;
-}
 
-if (stack_leng < 2)
+
+if (sum < 2)
 {
 fprintf(stderr, "L%d: can't subtract, stack too short\n", line_number);
 fclose(trans.data);
@@ -28,8 +25,8 @@ exit(EXIT_FAILURE);
 }
 
 curren = *stack;
-sum = curren->next->n - curren->n;
-curren->next->n = sum;
+stract = curren->next->n - curren->n;
+curren->next->n = stract;
 *stack = curren->next;
 free(curren);
 }
