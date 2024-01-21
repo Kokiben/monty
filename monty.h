@@ -56,7 +56,7 @@ void (*f)(stack_t **stack, unsigned int line_number);
 typedef struct transport_s
 {
 int status;
-char *opcode;
+char *opcod;
 char *payload;
 FILE *data;
 } transport_t;
@@ -92,7 +92,7 @@ void op_adderr(unsigned int line_number);
 
 void opnod_add(stack_t **, int);
 void opqueu_add(stack_t **, int);
-char  *code_clean(char *opcode);
+char  *code_clean(char *);
 ssize_t in_get(char **, int);
 char *resize_memo(char *, unsigned int, unsigned int);
 

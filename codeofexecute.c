@@ -35,7 +35,7 @@ co = strtok(code, " \n\t");
 if (co && co[0] == '#')
 return 0;
 
-trans.opcode = strtok(NULL, " \n\t");
+trans.opcod = strtok(NULL, " \n\t");
 while (mod_op[a].opcode && co)
 {
 if (strcmp(co, mod_op[a].opcode) == 0)

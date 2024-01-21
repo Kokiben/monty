@@ -9,13 +9,13 @@
 void code_push(stack_t **stack, unsigned int line_number)
 {
 int i, k = 0, stand = 0;
-if (trans.payload)
+if (trans.opcod)
 {
-if (trans.payload[0] == '-')
+if (trans.opcod[0] == '-')
 k++;
-for (; trans.payload[k] != '\0'; k++)
+for (; trans.opcod[k] != '\0'; k++)
 {
-if (trans.payload[k] > 57 || trans.payload[k] < 48)
+if (trans.opcod[k] > 57 || trans.opcod[k] < 48)
 stand = 1;
 }
 if (stand == 1)
@@ -35,10 +35,13 @@ free(trans.payload);
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
-i = atoi(trans.payload);
-opnod_add(stack, i);
-}
+i = atoi(trans.opcod);
+if (trans.status == 0)
 
+opnod_add(stack, i);
+else
+opqueu_add(stack, i);
+}
 /**
  * code_pall - Prints top element of stack.
  * @stack: Ptr to stack.

@@ -11,7 +11,7 @@ if (*stack == NULL)
 {
 fprintf(stderr, "L%d: can't pchar, stack empty\n", line_number);
 fclose(trans.data);
-free(trans.opcode);
+free(trans.opcod);
 free(trans.payload);
 _freesta(*stack);
 exit(EXIT_FAILURE);
@@ -21,7 +21,7 @@ if ((*stack)->n < 0 || (*stack)->n > 127)
 {
 fprintf(stderr, "L%d: can't pchar, value out of range\n", line_number);
 fclose(trans.data);
-free(trans.opcode);
+free(trans.opcod);
 free(trans.payload);
 _freesta(*stack);
 exit(EXIT_FAILURE);
