@@ -6,13 +6,14 @@
  */
 void _freesta(stack_t *stack)
 {
-stack_t *current = stack;
-stack_t *next;
+stack_t *curren, *tmp;
 
-while (current != NULL)
+curren = stack;
+
+while (curren)
 {
-next = current->next;
-free(current);
-current = next;
+tmp = curren->next;
+free(curren);
+curren = tmp;
 }
 }
