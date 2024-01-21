@@ -51,5 +51,5 @@ free(line_content);
 _freesta(stack);
 fclose(monty_file);
 
-return 0;
+return (0);
 }

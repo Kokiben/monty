@@ -33,7 +33,7 @@ char *co;
 
 co = strtok(code, " \n\t");
 if (co && co[0] == '#')
-return 0;
+return (0);
 
 trans.opcod = strtok(NULL, " \n\t");
 while (mod_op[a].opcode && co)
@@ -41,7 +41,7 @@ while (mod_op[a].opcode && co)
 if (strcmp(co, mod_op[a].opcode) == 0)
 {
 mod_op[a].f(stack, line_number);
-return 0;
+return (0);
 }
 a++;
 }
@@ -54,5 +54,5 @@ free(code);
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
-return 1;
+return (1);
 }
