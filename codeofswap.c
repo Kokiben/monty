@@ -19,7 +19,7 @@ len++;
 
 if (len < 2)
 {
-fprintf(trans.data, "L%d: can't swap, stack too short\n", line_number);
+fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
 fclose(trans.data);
 free(trans.payload);
 _freesta(*stack);
