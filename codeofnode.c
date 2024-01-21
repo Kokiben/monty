@@ -33,28 +33,21 @@ if (*stack != NULL)
  */
 void opqueu_add(stack_t **stack, int value)
 {
-stack_t *element = calloc(1, sizeof(stack_t));
-stack_t *tp = *stack;
-if (!element)
+stack_t *elemen, *curren;
+
+curren = *stack;
+elemen = calloc(1, sizeof(stack_t));
+
+if (elemen == NULL)
 {
-fprintf(stderr, "Error: calloc failed\n");
+fprintf(stderr, "Error: Unable to allocate memory\n");
 exit(EXIT_FAILURE);
 }
+if (curren)
+curren->prev = elemen;
 
-element->n = value;
-element->next = NULL;
-
-if (*stack == NULL)
-{
-element->prev = NULL;
-*stack = element;
-return;
-}
-while (tp->next != NULL)
-{
-tp = tp->next;
-}
-
-tp->next = element;
-element->prev = tp;
+elemen->n = value;
+elemen->next = *stack;
+elemen->prev = NULL;
+*stack = elemen;
 }
