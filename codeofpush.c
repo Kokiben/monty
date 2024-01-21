@@ -49,9 +49,12 @@ opqueu_add(stack, i);
  */
 void code_pall(stack_t **stack, unsigned int line_number)
 {
-stack_t *curren = *stack;
-
+stack_t *curren;
 (void)line_number;
+
+curren = *stack;
+if (curren == NULL)
+return;
 
 while (curren)
 {
