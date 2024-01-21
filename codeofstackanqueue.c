@@ -7,8 +7,8 @@
  */
 void stack_op(stack_t **stack, unsigned int line_number)
 {
-(void)line_number;
 (void)stack;
+(void)line_number;
 trans.status = 0;
 }
 
@@ -19,7 +19,7 @@ trans.status = 0;
  */
 void queue_op(stack_t **stack, unsigned int line_number)
 {
-(void)line_number;
 (void)stack;
+(void)line_number;
 trans.status = 1;
 }
