@@ -10,60 +10,49 @@
  */
 int code_execute(char *code, stack_t **stack, unsigned int line_number, FILE *data)
 {
-char *opcode, *arg;
+instruction_t mod_op[] = {
+{"push", code_push}, {"pall", code_pall}, {"pint", code_pint},
+{"pop", code_pop},
+{"swap", code_swap},
+{"add", code_add},
+{"nop", code_nop},
+{"sub", code_sub},
+{"div", code_div},
+{"mul", code_mul},
+{"mod", code_mod},
+{"pchar", code_pchar},
+{"pstr", code_pstr},
+{"rotl", rotl_op},
+{"rotr", rotr_op},
+{"queue", queue_op},
+{"stack", stack_op},
+{NULL, NULL}
+};
+unsigned int a = 0;
+char *co;
 
-opcode = strtok(code, " \t\n");
+co = strtok(code, " \n\t");
+if (co && co[0] == '#')
+return 0;
 
-if (!opcode || opcode[0] == '#')
+trans.payload = strtok(NULL, " \n\t");
+while (mod_op[a].opcode && co)
 {
+if (strcmp(co, mod_op[a].opcode) == 0)
+{
+mod_op[a].f(stack, line_number);
 return 0;
 }
-
-arg = strtok(NULL, " \t\n");
-
-if (!arg && strcmp(opcode, "push") == 0)
-{
-fprintf(stderr, "L%d: missing argument for %s\n", line_number, opcode);
-if (data)
-{
-fclose(data);
+a++;
 }
+
+if (co && mod_op[a].opcode == NULL)
+{
+fprintf(stderr, "L%d: unknown instruction %s\n", line_number, co);
+fclose(data);
+free(code);
 _freesta(*stack);
 exit(EXIT_FAILURE);
 }
-
-trans.opcode = opcode;
-trans.payload = arg;
-
-if (strcmp(opcode, "push") == 0)
-{
-code_push(stack, line_number);
-}
-else if (strcmp(opcode, "pop") == 0)
-{
-code_pop(stack, line_number);
-}
-else if (strcmp(opcode, "pall") == 0)
-{
-code_pall(stack, line_number);
-}
-else if (strcmp(opcode, "pint") == 0)
-{
-code_pint(stack, line_number);
-}
-else if (strcmp(opcode, "swap") == 0)
-{
-code_swap(stack, line_number);
-}
-else
-{
-fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
-if (data)
-{
-fclose(data);
-}
-_freesta(*stack);
-exit(EXIT_FAILURE);
-}
-return 0;
+return 1;
 }
