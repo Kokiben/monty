@@ -13,7 +13,7 @@ if (trans.payload)
 {
 if (trans.payload[0] == '-')
 k++;
-for (; trans.payload[k] != '\0'; j++)
+for (; trans.payload[k] != '\0'; k++)
 {
 if (trans.payload[k] > 57 || trans.payload[k] < 48)
 stand = 1;
@@ -23,7 +23,7 @@ if (stand == 1)
 fprintf(stderr, "L%d: usage: push integer\n", line_number);
 fclose(trans.data);
 free(trans.payload);
-free_stack(*stack);
+_freesta(*stack);
 exit(EXIT_FAILURE);
 }
 }
@@ -32,7 +32,7 @@ else
 fprintf(stderr, "L%d: usage: push integer\n", line_number);
 fclose(trans.data);
 free(trans.payload);
-free_stack(*stack);
+_freesta(*stack);
 exit(EXIT_FAILURE);
 }
 i = atoi(trans.payload);
@@ -45,7 +45,6 @@ opnod_add(stack, i);
  * @line_number: Line number in Monty file.
  */
 void code_pall(stack_t **stack, unsigned int line_number)
-{
 {
 stack_t *curren = *stack;
 
