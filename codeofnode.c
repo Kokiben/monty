@@ -7,23 +7,24 @@
  */
 void opnod_add(stack_t **stack, int value)
 {
-stack_t *element = calloc(1, sizeof(stack_t));
-if (!element)
+stack_t *new_elem, *curren;
+
+curren = *stack;
+new_elem = malloc(sizeof(stack_t));
+
+if (new_elem == NULL)
 {
-fprintf(stderr, "Error: calloc failed\n");
+fprintf(stderr, "Error: Unable to allocate memory\n");
 exit(EXIT_FAILURE);
 }
 
-element->n = value;
-element->next = *stack;
-element->prev = NULL;
+if (curren)
+curren->prev = new_elem;
 
-if (*stack != NULL)
-{
-(*stack)->prev = element;
-}
-
-*stack = element;
+new_elem->n = value;
+new_elem->next = *stack;
+new_elem->prev = NULL;
+*stack = new_elem;
 }
 
 /**
@@ -33,21 +34,34 @@ if (*stack != NULL)
  */
 void opqueu_add(stack_t **stack, int value)
 {
-stack_t *elemen, *curren;
+stack_t *new_elem, *curren;
 
 curren = *stack;
-elemen = calloc(1, sizeof(stack_t));
+new_elem = malloc(sizeof(stack_t));
 
-if (elemen == NULL)
+if (new_elem == NULL)
 {
 fprintf(stderr, "Error: Unable to allocate memory\n");
 exit(EXIT_FAILURE);
 }
-if (curren)
-curren->prev = elemen;
 
-elemen->n = value;
-elemen->next = *stack;
-elemen->prev = NULL;
-*stack = elemen;
+new_elem->n = value;
+new_elem->next = NULL;
+
+if (curren)
+{
+while (curren->next)
+curren = curren->next;
+}
+
+if (!curren)
+{
+*stack = new_elem;
+new_elem->prev = NULL;
+}
+else
+{
+curren->next = new_elem;
+new_elem->prev = curren;
+}
 }
